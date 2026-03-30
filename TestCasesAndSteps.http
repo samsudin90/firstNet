@@ -1,0 +1,114 @@
+@host = https://localhost:7123
+@token = <your-jwt-token-here>
+
+### Login to get JWT token
+POST {{host}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "password123"
+}
+
+###
+# TEST CASES ENDPOINTS
+###
+
+### Get all test cases
+GET {{host}}/api/testcase
+Authorization: Bearer {{token}}
+
+### Get test case by ID
+GET {{host}}/api/testcase/1
+Authorization: Bearer {{token}}
+
+### Get test cases by project ID
+GET {{host}}/api/testcase/project/1
+Authorization: Bearer {{token}}
+
+### Create new test case
+POST {{host}}/api/testcase
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "projectId": 1,
+  "name": "Login Test Case"
+}
+
+### Update test case
+PUT {{host}}/api/testcase/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "id": 1,
+  "projectId": 1,
+  "name": "Updated Login Test Case",
+  "createdAt": "2024-01-01 10:00:00"
+}
+
+### Delete test case
+DELETE {{host}}/api/testcase/1
+Authorization: Bearer {{token}}
+
+###
+# TEST STEPS ENDPOINTS
+###
+
+### Get all test steps
+GET {{host}}/api/teststep
+Authorization: Bearer {{token}}
+
+### Get test step by ID
+GET {{host}}/api/teststep/1
+Authorization: Bearer {{token}}
+
+### Get test steps by test case ID
+GET {{host}}/api/teststep/testcase/1
+Authorization: Bearer {{token}}
+
+### Create new test step
+POST {{host}}/api/teststep
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "testCaseId": 1,
+  "stepOrder": 1,
+  "action": "click",
+  "selector": "#login-button",
+  "value": ""
+}
+
+### Create test step with value
+POST {{host}}/api/teststep
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "testCaseId": 1,
+  "stepOrder": 2,
+  "action": "type",
+  "selector": "#username",
+  "value": "testuser@example.com"
+}
+
+### Update test step
+PUT {{host}}/api/teststep/1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "id": 1,
+  "testCaseId": 1,
+  "stepOrder": 1,
+  "action": "click",
+  "selector": "#submit-button",
+  "value": "",
+  "createdAt": "2024-01-01 10:00:00"
+}
+
+### Delete test step
+DELETE {{host}}/api/teststep/1
+Authorization: Bearer {{token}}
