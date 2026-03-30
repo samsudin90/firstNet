@@ -21,6 +21,7 @@ public class TestCaseRepository
         using var connection = new MySqlConnection(_connectionString);
         connection.Open();
 
+        // query all test cases
         var query = "SELECT id, project_id, name, created_at FROM test_cases";
 
         using var command = new MySqlCommand(query, connection);
